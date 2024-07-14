@@ -2,83 +2,51 @@ import 'package:flutter/material.dart';
 import 'package:gpa_cal/custom_widgets/course_name.dart';
 import 'package:gpa_cal/custom_widgets/credit_hour_list.dart';
 import 'package:gpa_cal/custom_widgets/grade_list.dart';
+import 'package:gpa_cal/model/course_model.dart';
 
 class CourseContainer extends StatelessWidget {
-   //Course course = Course(name: '' , creditHours: 0 , grade: '') ;
+  final int index;
+  final Course course;
+  final Function(String?, int? , String?) onChanged;
 
-  CourseContainer({super.key});
-  int  creditHour = 0;
-  String grade = '';
+  CourseContainer({
+    required this.index,
+    required this.course,
+    required this.onChanged,
+  });
 
-
-
-  double calculateGPA() {
-    final Map<String, double> gradeToQualityPoints = {
-      'A+': 4.0,
-      'A': 4.0,
-      'A-': 3.67,
-      'B+': 3.33,
-      'B': 3.0,
-      'B-': 2.67,
-      'C+': 2.33,
-      'C': 2.0,
-      'C-': 1.67,
-      'D+': 1.33,
-      'D': 1.0,
-      'F': 0.0,
-    };
-
-    if (gradeToQualityPoints[grade] == null) {
-      return 0.0;
-    }
-    return creditHour * gradeToQualityPoints[grade]!;
-  }
-
-  int getCreditHours() => creditHour;
-  
-    void updateGrade(String newGrade) {
-        print('newly value $newGrade');  
-          grade = newGrade;
-         
-    }
-       void updateCreditHour(int newCreditHour) {
-      print('newly value $newCreditHour');
-     
-        creditHour = newCreditHour;
-       
-  
-     
-    }
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.all(8.0),
+    return Card(
+      margin: EdgeInsets.all(8.0),
+      child: Container(
+        padding: EdgeInsets.all(8.0),
       margin: EdgeInsets.all(8.0),
       decoration: BoxDecoration(
         border: Border.all(color: Colors.black),
-        borderRadius: BorderRadius.circular(8.0),
-      ),
-      child: Column(
-        children: [
-          CourseName(),
-          Row(
-            children: [
-              Expanded(
-                child: Grades(
-                  onChanged: updateGrade,
-                ),
-              ),
-              Expanded(
-                child: CreditHours(
-                  onChanged: updateCreditHour,
-                ),
-              )
-            ],
-          )
-        ],
+        borderRadius: BorderRadius.circular(8.0),),
+        child: Column(
+          children: [
+            // Text('Course ${index + 1}', style: TextStyle(fontSize: 18)),
+            CourseName(initialValue: course.name!,onChanged: (name) => onChanged( null,null , name),),
+            SizedBox(height: 8),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                CreditHours(
+              initialValue: course.creditHours,
+              onChanged: (creditHours) => onChanged(null, creditHours,null),
+            ),
+            //SizedBox(width: 20),
+            Grades(
+              selectedGrade: course.grade,
+              onChanged: (grade) => onChanged(grade ,null , null ),
+            ),
+              ],
+            )
+          ],
+        ),
       ),
     );
   }
 }
-
-

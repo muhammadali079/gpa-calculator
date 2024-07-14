@@ -1,39 +1,38 @@
 import 'package:flutter/material.dart';
 
-class Grades extends StatefulWidget {
-  final Function(String)? onChanged; 
-  @override
-   Grades({super.key , required this.onChanged});
+class Grades extends StatelessWidget {
+  final String? selectedGrade;
+  final Function(String?) onChanged;
 
-  @override
-  State<Grades> createState() => _GradesState();
-}
+  Grades({required this.selectedGrade, required this.onChanged});
 
-class _GradesState extends State<Grades> {
-  final List<String> grades = ['A+' , 'A' , 'A-' , 'B+' , 'B' , 'B-' , 'C+' , 'C' , 'C-' , 'D+' , 'D' , 'F'];
-
-   String? _selectedGrade;
+  final List<String> gradeList = [
+    'A+',
+    'A',
+    'A-',
+    'B+',
+    'B',
+    'B-',
+    'C+',
+    'C',
+    'C-',
+    'D+',
+    'D',
+    'F',
+  ];
 
   @override
   Widget build(BuildContext context) {
     return DropdownButton<String>(
-      value: _selectedGrade,
-      hint: Text('Select Grade'),
-      items: grades.map((e) {
+      hint: Text("Select Grade"),
+      value: selectedGrade,
+      items: gradeList.map((String grade) {
         return DropdownMenuItem<String>(
-          value: e,
-          child: Text(e),
+          value: grade,
+          child: Text(grade),
         );
-      }).toList(), 
-      onChanged: (String? selectedGrade) {
-        print('Selected grade: $selectedGrade');
-        setState(() {
-               _selectedGrade =  selectedGrade;
-        });
-        if (widget.onChanged!=null){
-              widget.onChanged!(selectedGrade!);
-        }
-      },
+      }).toList(),
+      onChanged: onChanged,
     );
   }
 }

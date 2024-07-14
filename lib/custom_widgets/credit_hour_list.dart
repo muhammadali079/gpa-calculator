@@ -1,36 +1,26 @@
 import 'package:flutter/material.dart';
 
-class CreditHours extends StatefulWidget {
-  final Function(int)? onChanged;
-  @override
-  const CreditHours({Key? key, this.onChanged}) : super(key: key);
+class CreditHours extends StatelessWidget {
+  final int initialValue;
+  final Function(int) onChanged;
 
-  @override
-  State<CreditHours> createState() => _CreditHoursState();
-}
+  CreditHours({required this.initialValue, required this.onChanged});
 
-class _CreditHoursState extends State<CreditHours> {
-  final List<int> credit_hours = [0,1,2,3,4];
-  int? _selectedCreditsHours;
   @override
   Widget build(BuildContext context) {
     return DropdownButton<int>(
-      value: _selectedCreditsHours,
+      value: initialValue,
       hint: Text('Select Credit Hours'),
-      items: credit_hours.map((e) {
+      items: [0, 1, 2, 3, 4].map((e) {
         return DropdownMenuItem<int>(
           value: e,
           child: Text(e.toString()),
         );
-      }).toList(), 
+      }).toList(),
       onChanged: (int? selectedHours) {
-        setState(() {
-          _selectedCreditsHours = selectedHours;
-        });
-         if (widget.onChanged != null) {
-          widget.onChanged!(selectedHours!);
+        if (selectedHours != null) {
+          onChanged(selectedHours);
         }
-        print('Selected Credit Hours: $selectedHours');
       },
     );
   }
