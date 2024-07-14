@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:gpa_cal/utils/modes.dart';
 
 class SGPA extends StatelessWidget {
   final double initialValue;
@@ -12,12 +13,13 @@ class SGPA extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
-     TextEditingController _controller = TextEditingController(text: initialValue.toString());
-     _controller.selection = TextSelection.fromPosition(
+    TextEditingController _controller =
+        TextEditingController(text: initialValue.toString());
+    _controller.selection = TextSelection.fromPosition(
         TextPosition(offset: _controller.text.length));
     return Expanded(
       child: TextField(
+        cursorColor: isDarkMode(context) ? Colors.white : Colors.black,
         decoration: InputDecoration(
           labelText: 'SGPA',
           border: OutlineInputBorder(),

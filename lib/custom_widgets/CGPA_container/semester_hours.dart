@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:gpa_cal/utils/modes.dart';
 
 class CreditHours extends StatelessWidget {
   final int initialValue;
@@ -18,6 +19,7 @@ class CreditHours extends StatelessWidget {
         TextPosition(offset: _controller.text.length));
     return Expanded(
       child: TextField(
+         cursorColor: isDarkMode(context) ? Colors.white : Colors.black,
         decoration: InputDecoration(
           labelText: 'Enter Credit Hours',
           border: OutlineInputBorder(),

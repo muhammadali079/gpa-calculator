@@ -3,6 +3,7 @@ import 'package:gpa_cal/custom_widgets/CGPA_container/semester_gpa.dart';
 import 'package:gpa_cal/custom_widgets/CGPA_container/semester_hours.dart';
 import 'package:gpa_cal/custom_widgets/CGPA_container/semester_name.dart';
 import 'package:gpa_cal/model/semester_model.dart';
+import 'package:gpa_cal/utils/modes.dart';
 
 class SemesterContainer extends StatelessWidget {
   final int index;
@@ -20,12 +21,15 @@ class SemesterContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Color borderColor = isDarkMode(context)? Colors.white : Colors.black;
     return Card(
       margin: EdgeInsets.all(8.0),
       child: Container(
         padding: EdgeInsets.all(8.0),
         decoration: BoxDecoration(
-          border: Border.all(color: Colors.black),
+          border: Border.all(
+            color: borderColor
+          ),
           borderRadius: BorderRadius.circular(8.0),
         ),
         child: Column(

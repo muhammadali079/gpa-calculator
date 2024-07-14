@@ -10,12 +10,11 @@ class CreditHours extends StatelessWidget {
   Widget build(BuildContext context) {
     return DropdownButton<int>(
       value: initialValue,
-      hint: Text('Select Credit Hours'),
+      hint: Text('Select Credit Hours' ),
       items: [0, 1, 2, 3, 4].map((e) {
         return DropdownMenuItem<int>(
           value: e,
-         child: Text(e == 0 ? 'Select Credit Hours' : e.toString()),
-        );
+         child: Text(e == 0 ? 'Select Credit Hours' : e.toString()  ));
       }).toList(),
       onChanged: (int? selectedHours) {
         if (selectedHours != null) {

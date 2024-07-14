@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gpa_cal/utils/modes.dart';
 
 class SemesterName extends StatelessWidget {
   final String initialValue;
@@ -17,6 +18,7 @@ class SemesterName extends StatelessWidget {
 
     return Expanded(
       child: TextField(
+         cursorColor: isDarkMode(context) ? Colors.white : Colors.black,
         decoration: InputDecoration(
           labelText: 'Semester Name',
           hintText: 'Spring 2023',

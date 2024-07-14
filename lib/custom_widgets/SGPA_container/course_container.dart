@@ -3,6 +3,7 @@ import 'package:gpa_cal/custom_widgets/SGPA_container/course_name.dart';
 import 'package:gpa_cal/custom_widgets/SGPA_container/credit_hour_list.dart';
 import 'package:gpa_cal/custom_widgets/SGPA_container/grade_list.dart';
 import 'package:gpa_cal/model/course_model.dart';
+import 'package:gpa_cal/utils/modes.dart';
 
 class CourseContainer extends StatelessWidget {
   final int index;
@@ -20,19 +21,24 @@ class CourseContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double containerWidth = MediaQuery.of(context).size.width * 0.5;
+    bool isTabletOrLaptop = MediaQuery.of(context).size.width > 600;
+    Color borderColor = isDarkMode(context)? Colors.white : Colors.black;
     return Card(
       margin: EdgeInsets.all(8.0),
       child: Container(
+        width: containerWidth,
         padding: EdgeInsets.all(8.0),
         decoration: BoxDecoration(
-          border: Border.all(color: Colors.black),
+    
+          border: Border.all(color: borderColor),
           borderRadius: BorderRadius.circular(8.0),
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Expanded(
                   child: CourseName(

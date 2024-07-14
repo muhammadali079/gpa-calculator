@@ -34,10 +34,8 @@ double calculateCGPA(List<Semester> semesters) {
   for (var semester in semesters) {
     
     totalQualityPoints = totalQualityPoints + (semester.sgpa * semester.creditHours);
-    print("each level $totalQualityPoints");
     totalCreditHours += semester.creditHours;
   }
-  print("after level $totalQualityPoints");
   if (totalCreditHours == 0) {
     return 0.0; 
   }
