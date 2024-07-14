@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:gpa_cal/bloc/course_bloc.dart';
-import 'package:gpa_cal/bloc/course_event.dart';
-import 'package:gpa_cal/bloc/course_state.dart';
-import 'package:gpa_cal/custom_widgets/course_container.dart';
+import 'package:gpa_cal/bloc/SGPA/course_bloc.dart';
+import 'package:gpa_cal/bloc/SGPA/course_event.dart';
+import 'package:gpa_cal/bloc/SGPA/course_state.dart';
+import 'package:gpa_cal/custom_widgets/SGPA_container/course_container.dart';
 import 'package:gpa_cal/model/course_model.dart';
 
 class SGPAScreen extends StatelessWidget {
@@ -28,7 +28,7 @@ class SGPAScreen extends StatelessWidget {
                   : (state as CourseUpdated).sgpa;
 
               return Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
+               // crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   SizedBox(height: 16),
                   Center(
@@ -42,6 +42,9 @@ class SGPAScreen extends StatelessWidget {
                       itemCount: courses.length,
                       itemBuilder: (context, index) {
                         return CourseContainer(
+
+                          key:Key('course_$index'),
+
                           index: index,
                           course: courses[index],
                           onChanged: (grade, creditHours , name) {
@@ -58,6 +61,12 @@ class SGPAScreen extends StatelessWidget {
                                   UpdateNameEvent(index, name));
                             }
                           },
+                          onRemoved: () {
+                            context.read<CourseBloc>().add(
+                                  DeleteContainerEvent(index: index));
+                            
+                          },
+                          
                         );
                       },
                     ),

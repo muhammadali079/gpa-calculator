@@ -1,3 +1,5 @@
+
+
 import 'package:flutter/material.dart';
 
 class Grades extends StatelessWidget {
@@ -25,13 +27,19 @@ class Grades extends StatelessWidget {
   Widget build(BuildContext context) {
     return DropdownButton<String>(
       hint: Text("Select Grade"),
-      value: selectedGrade,
-      items: gradeList.map((String grade) {
-        return DropdownMenuItem<String>(
-          value: grade,
-          child: Text(grade),
-        );
-      }).toList(),
+      value: selectedGrade == null || selectedGrade!.isEmpty ? null : selectedGrade,
+      items: [
+        DropdownMenuItem<String>(
+          value: null,
+          child: Text("Select Grade"),
+        ),
+        ...gradeList.map((String grade) {
+          return DropdownMenuItem<String>(
+            value: grade,
+            child: Text(grade),
+          );
+        }),
+      ],
       onChanged: onChanged,
     );
   }

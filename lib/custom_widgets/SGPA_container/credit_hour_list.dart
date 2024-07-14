@@ -14,7 +14,7 @@ class CreditHours extends StatelessWidget {
       items: [0, 1, 2, 3, 4].map((e) {
         return DropdownMenuItem<int>(
           value: e,
-          child: Text(e.toString()),
+         child: Text(e == 0 ? 'Select Credit Hours' : e.toString()),
         );
       }).toList(),
       onChanged: (int? selectedHours) {

@@ -40,3 +40,10 @@ class UpdateCreditHoursEvent extends CourseEvent {
 
   UpdateCreditHoursEvent(this.index, this.newCreditHours);
 }
+
+class DeleteContainerEvent extends CourseEvent {
+  final int index;
+
+
+  DeleteContainerEvent({required this.index});
+}
