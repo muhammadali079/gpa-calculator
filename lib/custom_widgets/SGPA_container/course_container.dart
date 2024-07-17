@@ -21,13 +21,10 @@ class CourseContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double containerWidth = MediaQuery.of(context).size.width * 0.5;
-    bool isTabletOrLaptop = MediaQuery.of(context).size.width > 600;
     Color borderColor = isDarkMode(context)? Colors.white : Colors.black;
     return Card(
       margin: EdgeInsets.all(8.0),
       child: Container(
-        width: containerWidth,
         padding: EdgeInsets.all(8.0),
         decoration: BoxDecoration(
     

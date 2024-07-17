@@ -7,7 +7,6 @@ import 'package:gpa_cal/utils/modes.dart';
 import 'package:gpa_cal/utils/theme_provider.dart';
 import 'package:molten_navigationbar_flutter/molten_navigationbar_flutter.dart';
 import 'package:provider/provider.dart';
-
 void main() {
   runApp( MyApp());
 }

@@ -29,8 +29,8 @@ class CreditHours extends StatelessWidget {
         controller: _controller,
         onChanged: (value) {
           if (value.isNotEmpty) {
-            int hours = int.tryParse(value) ?? initialValue;
-            hours = hours.clamp(0, 25);
+            int hours = int.parse(value);
+           // hours = hours.clamp(0, 25);
 
             onChanged(hours);
           }

@@ -8,28 +8,30 @@ import 'package:gpa_cal/utils/modes.dart';
 class SemesterContainer extends StatelessWidget {
   final int index;
   final Semester semester;
-  final Function(String?, int?, double?) onChanged;
+  final Function(String?) onNameChanged;
+  final Function(int?) onCreditHoursChanged;
+  final Function(double?) onSGPAChanged;
   final VoidCallback onRemoved;
 
   SemesterContainer({
     required Key key,
     required this.index,
     required this.semester,
-    required this.onChanged,
+    required this.onNameChanged,
+    required this.onCreditHoursChanged,
+    required this.onSGPAChanged,
     required this.onRemoved,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    Color borderColor = isDarkMode(context)? Colors.white : Colors.black;
+    Color borderColor = isDarkMode(context) ? Colors.white : Colors.black;
     return Card(
       margin: EdgeInsets.all(8.0),
       child: Container(
         padding: EdgeInsets.all(8.0),
         decoration: BoxDecoration(
-          border: Border.all(
-            color: borderColor
-          ),
+          border: Border.all(color: borderColor),
           borderRadius: BorderRadius.circular(8.0),
         ),
         child: Column(
@@ -40,7 +42,7 @@ class SemesterContainer extends StatelessWidget {
               children: [
                 SemesterName(
                   initialValue: semester.name!,
-                  onChanged: (name) => onChanged(name, null, null),
+                  onChanged: onNameChanged,
                 ),
                 IconButton(
                   onPressed: onRemoved,
@@ -54,12 +56,12 @@ class SemesterContainer extends StatelessWidget {
               children: [
                 CreditHours(
                   initialValue: semester.creditHours,
-                  onChanged: (creditHours) => onChanged(null, creditHours, null),
+                  onChanged: onCreditHoursChanged,
                 ),
                 SizedBox(width: 8),
                 SGPA(
                   initialValue: semester.sgpa,
-                  onChanged: (sgpa) => onChanged(null, null, sgpa),
+                  onChanged: onSGPAChanged,
                 ),
               ],
             ),
