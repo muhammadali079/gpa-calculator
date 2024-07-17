@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class ThemeProvider with ChangeNotifier {
 
   bool _isDarkMode = false;
+  late SharedPreferences _preferences ;
   
   final ThemeData _lightTheme = ThemeData(
     primarySwatch: Colors.blue,
@@ -64,9 +66,21 @@ class ThemeProvider with ChangeNotifier {
 
   void toggleTheme() {
     _isDarkMode = !_isDarkMode;
+    _saveToLocalStorage();
     notifyListeners();
   }
+   ThemeProvider() {
+    loadFromLocalStorage();
+  }
+   Future<void> loadFromLocalStorage() async {
+    _preferences = await SharedPreferences.getInstance();
+    _isDarkMode = _preferences.getBool('darkMode') ?? false;
+    notifyListeners();
+  }
+  void _saveToLocalStorage(){
+     _preferences.setBool('darkMode', _isDarkMode);
 
+  }
   ThemeData getCurrentTheme() {
     return _isDarkMode ? _darkTheme : _lightTheme;
   }

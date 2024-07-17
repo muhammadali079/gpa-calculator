@@ -17,14 +17,18 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
       create: (context) => ThemeProvider(),
+
       child: Consumer<ThemeProvider>(
-        builder: (context, themeProvider, _) => MaterialApp(
+        builder: (context, themeProvider, _) {
+          themeProvider.loadFromLocalStorage();
+          
+          return MaterialApp(
           title: 'GPA Calculator',
-          theme: themeProvider.lightTheme,
+          theme: themeProvider.getCurrentTheme(),
           darkTheme: themeProvider.darkTheme,
           themeMode: themeProvider.isDarkMode ? ThemeMode.dark : ThemeMode.light,
           home:const  MyHomePage(),
-        ),
+        );},
       ),
     );
   }
