@@ -7,28 +7,28 @@ import 'package:gpa_cal/utils/modes.dart';
 import 'package:gpa_cal/utils/theme_provider.dart';
 import 'package:molten_navigationbar_flutter/molten_navigationbar_flutter.dart';
 import 'package:provider/provider.dart';
-void main() {
-  runApp( MyApp());
+import 'package:shared_preferences/shared_preferences.dart';
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  final prefs = await SharedPreferences.getInstance();
+  runApp(MyApp(prefs: prefs));
 }
 
-
 class MyApp extends StatelessWidget {
+  final SharedPreferences prefs;
+
+  const MyApp({Key? key, required this.prefs}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
-      create: (context) => ThemeProvider(),
-
+      create: (context) => ThemeProvider(prefs),
       child: Consumer<ThemeProvider>(
-        builder: (context, themeProvider, _) {
-          themeProvider.loadFromLocalStorage();
-          
-          return MaterialApp(
-          title: 'GPA Calculator',
+        builder: (context, themeProvider, _) => MaterialApp(
+          title: 'GPA CALCULATOR',
           theme: themeProvider.getCurrentTheme(),
-          darkTheme: themeProvider.darkTheme,
-          themeMode: themeProvider.isDarkMode ? ThemeMode.dark : ThemeMode.light,
-          home:const  MyHomePage(),
-        );},
+          home: MyHomePage(),
+        ),
       ),
     );
   }

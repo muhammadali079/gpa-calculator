@@ -69,11 +69,12 @@ class ThemeProvider with ChangeNotifier {
     _saveToLocalStorage();
     notifyListeners();
   }
-   ThemeProvider() {
+   ThemeProvider(SharedPreferences pref) {
+    _preferences = pref;
     loadFromLocalStorage();
   }
    Future<void> loadFromLocalStorage() async {
-    _preferences = await SharedPreferences.getInstance();
+   // _preferences = await SharedPreferences.getInstance();
     _isDarkMode = _preferences.getBool('darkMode') ?? false;
     notifyListeners();
   }
